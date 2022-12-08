@@ -31,17 +31,15 @@ def FormatInput(fLines):
     moveAmt = []
     str = ""
     for x in range(len(fLines)):
-        for y in range(len(fLines[x])):
-            print(fLines[x])
-            if(fLines[x][6] != " "):
-                moveAmt.append(fLines[x][5] + fLines[x][6])
-                fromIndex.append(fLines[x][13])
-                str = fLines[x][-1]
-            else:
-                moveAmt.append(fLines[x][5])
-                str = fLines[x][12]
-                fromIndex.append(fLines[x][12])
-                str = fLines[x][-1]
+        print(fLines[x])
+        if(fLines[x][6] != " "):
+            moveAmt.append(int(fLines[x][5] + fLines[x][6]))
+            fromIndex.append(int(fLines[x][13]))
+            toIndex.append(int(fLines[x][len(fLines[x])-1]))
+        else:
+            moveAmt.append(int(fLines[x][5]))
+            fromIndex.append(int(fLines[x][12]))
+            toIndex.append(int(fLines[x][len(fLines[x])-1]))
     return moveAmt, fromIndex, toIndex
 
 def Move(amtList, fromList, toList):
@@ -49,9 +47,9 @@ def Move(amtList, fromList, toList):
 
 def main():
     fLines = GetFile(TESTINPUT)
-    list1, list2, list3 = FormatInput(fLines)
-    print(list1[0], list2[0], list3[0])
-    result = CompareList(list)
+    amtList, fromList, toList = FormatInput(fLines)
+    print(amtList, fromList, toList)
+    result = Move(amtList, fromList, toList)
     print("Overlaps: " + str(result))
 
 
