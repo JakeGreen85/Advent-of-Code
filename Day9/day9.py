@@ -33,36 +33,29 @@ def FormatInput(fLines):
 
 def CompareList(list):
     overlaps = 0
-
     for x in list:
-        if (int(x[0]) <= int(x[2])) and (int(x[1]) >= int(x[3])):
-            overlaps += 1
-        elif (int(x[0]) >= int(x[2])) and (int(x[1]) <= int(x[3])):
-            overlaps += 1
+        print(x)
+        print(x[0])
+        print(x[1])
+        print(x[2])
+        print(x[3])
+        if x[0] <= x[2]:
+            if x[1] >= x[3]:
+                overlaps += 1
+                continue
+        if(x[0] >= x[2]):
+            if x[1] <= x[3]:
+                overlaps += 1
+                continue
 
     return overlaps
-
-def RangeOverlap(list):
-    overlaps = 0
-    for x in list:
-        if(int(x[0]) >= int(x[2]) and int(x[0]) <= int(x[3])):
-            overlaps += 1
-        elif(int(x[1]) >= int(x[2]) and int(x[1]) <= int(x[3])):
-            overlaps += 1
-        elif(int(x[2]) >= int(x[0]) and int(x[2]) <= int(x[1])):
-            overlaps += 1
-        elif(int(x[3]) >= int(x[0]) and int(x[3]) <= int(x[1])):
-            overlaps += 1
-    return overlaps
-
 
 def main():
-    fLines = GetFile(INPUT)
+    fLines = GetFile(TESTINPUT)
     list = FormatInput(fLines)
+    print(list[0])
     result = CompareList(list)
-    print("Part 1: Overlaps: " + str(result))
-    result2 = RangeOverlap(list)
-    print("Part 2: Range Overlaps: " + str(result2))
+    print("Overlaps: " + str(result))
 
 
 main()
