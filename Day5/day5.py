@@ -31,7 +31,6 @@ def FormatInput(fLines):
     moveAmt = []
     str = ""
     for x in range(len(fLines)):
-        print(fLines[x])
         if(fLines[x][6] != " "):
             moveAmt.append(int(fLines[x][5] + fLines[x][6]))
             fromIndex.append(int(fLines[x][13]))
@@ -43,14 +42,44 @@ def FormatInput(fLines):
     return moveAmt, fromIndex, toIndex
 
 def Move(amtList, fromList, toList):
+    for x in range(len(amtList)):
+        MoveCrates(amtList[x], fromList[x], toList[x])
     return 0
 
+def MoveCrates(amount, start, end):
+    for x in range(amount):
+        stacks[end-1].append(stacks[start-1][len(stacks[start-1])-1])
+        stacks[start-1].pop()
+    return 0
+
+def newMove(amtList, fromList, toList):
+    for x in range(len(amtList)):
+        NewMoveCrates(amtList[x], fromList[x], toList[x])
+    return 0
+
+def NewMoveCrates(amount, start, end):
+    tempList = stacks[start-1][-amount:]
+    for a in tempList:
+        stacks[end-1].append(a)
+    for x in range(amount):
+        stacks[start-1].pop()
+    return 0
+
+def PrintTopStacks():
+    for b in stacks:
+        print(b[len(b)-1])
+
 def main():
-    fLines = GetFile(TESTINPUT)
+    fLines = GetFile(INPUT)
     amtList, fromList, toList = FormatInput(fLines)
-    print(amtList, fromList, toList)
-    result = Move(amtList, fromList, toList)
-    print("Overlaps: " + str(result))
+
+    # Part 1
+    #Move(amtList, fromList, toList)
+    #PrintTopStacks()
+
+    # Part 2
+    newMove(amtList, fromList, toList)
+    PrintTopStacks()
 
 
 main()
